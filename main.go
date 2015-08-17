@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"path/filepath"
 )
 
 var port int
@@ -19,10 +18,7 @@ func main() {
 	fmt.Printf("Serving current dir on %d port\n", port)
 
 	if action == "s" {
-		dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-		if err != nil {
-			panic(err)
-		}
+		dir, err := os.Getwd()
 
 		err = http.ListenAndServe(
 			fmt.Sprintf(":%d", port),
